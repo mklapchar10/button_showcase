@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Button Designs</title>
+        <link rel="stylesheet" href="styles.css">
+        <meta charset="UTF-8">
+    </head>
+
+    <header>
+        Button Showroom
+    </header>
+
+    <body>
+        <div class="container">
+        <div class="grid">
+            <button id="pop">Pop</button>
+            <button id="colors" >Colors</button>
+            <button id="rainbow">Rainbow</button>
+            <button id="glow">Glow</button>
+            <button id="spin">Spin</button>
+            <button id="sound">Sound</button>
+            <button id="press">Press</button>
+            <button id="gradient">Gradient</button>
+            <button id="trick">Trick</button> 
+            <button id="image">Image</button>
+            <button id="shapes">Shapes</button>
+            <button id="neon">Neon</button>
+        </div>    
+        </div>
+    </body>
+
+    <footer>
+        Made by: Matthew Klapchar
+    </footer>
+
+<script>
+
+  const buttons = document.querySelectorAll('.grid button');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.id;
+      alert(`You clicked the ${id} button`);
+    });
+  });
+
+  const soundButton = document.getElementById('sound');
+
+  const hoverSound = new Audio('sounds/pop.mp3');
+  hoverSound.preload = 'auto';
+
+  let audioUnlocked = false;
+  const unlockAudio = () => {
+    if (!audioUnlocked) {
+      hoverSound.play().catch(() => {});
+      hoverSound.pause();
+      hoverSound.currentTime = 0;
+      audioUnlocked = true;
+    }
+  };
+  document.addEventListener('click', unlockAudio, { once: true });
+  document.addEventListener('keydown', unlockAudio, { once: true });
+
+  soundButton.addEventListener('mouseenter', () => {
+    hoverSound.currentTime = 0;
+    hoverSound.play();
+  });
+
+const trickButton = document.getElementById('trick');
+
+const rect = trickButton.getBoundingClientRect();
+const originalTop = rect.top;
+const originalLeft = rect.left;
+const originalRight = rect.right;
+const originalBottom = rect.bottom;
+
+let isActive = false;
+
+document.addEventListener('mousemove', (e) => {
+  
+  if (
+    e.clientX >= originalLeft &&
+    e.clientX <= originalRight &&
+    e.clientY >= originalTop &&
+    e.clientY <= originalBottom
+  ) {
+    if (!isActive) {
+      trickButton.classList.add('trick-active');
+      isActive = true;
+    }
+  } else {
+    if (isActive) {
+      trickButton.classList.remove('trick-active');
+      isActive = false;
+    }
+  }
+});
+</script>
+
+</html>

@@ -1,0 +1,267 @@
+body {
+  font-family: sans-serif;
+  background: #111;
+  text-align: center;
+  margin: 0;
+  padding: 2rem;
+}
+
+header {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-auto-rows: auto;
+  gap: 5rem;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+button {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: white;
+  color: #333;
+}
+
+#pop {
+    transition: transform 0.2s ease;
+}
+
+#pop:hover {
+    transform: scale(1.3);
+}
+
+#colors{
+  transition: background-color 0.3s ease;
+  background: white;
+  color: #333;
+}
+
+#colors:hover {
+    animation: color-cycle 3s infinite;
+}
+
+@keyframes color-cycle {
+  0% { background-color: #e74c3c; }
+  25% { background-color: #f1c40f; }
+  50% { background-color: #2ecc71; }
+  75% { background-color: #3498db; }
+  100% { background-color: #e74c3c; }
+}
+
+#rainbow {
+  background: white;
+  color: #333;
+  padding: 1rem 2rem;
+  border: 6px dashed transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+#rainbow:hover {
+  border-image: conic-gradient(
+      red 0deg 45deg,
+      orange 45deg 90deg,
+      yellow 90deg 135deg,
+      green 135deg 180deg,
+      blue 180deg 225deg,
+      indigo 225deg 270deg,
+      violet 270deg 315deg,
+      red 315deg 360deg
+    )
+    1; 
+}     
+
+#glow {
+  background: white;
+  color: #333;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: none;
+}
+
+#glow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 255, 150, 0.9),
+              0 0 40px rgba(255, 255, 150, 0.7);
+}
+
+#spin {
+  background: white;
+  color: #333;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#spin:hover {
+  animation: spin-animation 0.7s forwards;
+}
+
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#sound:hover {
+    transform: scale(1.1);
+}
+
+#press {
+  background: white;
+  color: #333;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, inset-shadow 0.1s ease;
+  box-shadow: 0 5px #999;
+}
+
+#press:hover {
+  transform: translateY(4px);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2), 0 1px #666;
+}
+
+#gradient {
+  position: relative;      
+  z-index: 0;                  
+  background: white;
+  color: #333;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border: 4px solid transparent;
+  cursor: pointer;
+  overflow: visible;
+}
+
+#gradient::before {
+  content: "";
+  position: absolute;
+  inset: -4px;                
+  border-radius: calc(8px + 4px); 
+  background: linear-gradient(
+    90deg,
+    #2eb62c, #57c84d, #83d475, #abe098, #c5e8b7, #2eb62c
+  );
+  background-size: 200% 100%;
+  z-index: -1;                 
+  opacity: 0;                  
+  transition: opacity 0.25s ease;
+  pointer-events: none;        
+}
+
+#gradient:hover::before {
+  opacity: 1;
+  animation: gradient 3s linear infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+#trick {
+  background: white;
+  color: #333;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.1s ease;
+}
+
+#trick.trick-active {
+  transform: translateY(100%);
+}
+
+#image {
+  background: white;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+#image:hover {
+  color: transparent;
+  background-image: url('images/pattern.jpg');
+}
+
+#shapes {
+  background: white;
+  color: #333;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-radius 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+#shapes:hover {
+  border-radius: 50%;
+}
+
+#neon {
+  background: white;
+  color: #333;              
+  padding: 1rem 2rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#neon:hover {
+  background: transparent;
+  color: #ff073a;
+  text-shadow:
+    0 0 5px #ff073a,
+    0 0 10px #ff073a,
+    0 0 20px #ff073a,
+    0 0 40px #ff073a;
+
+  border: 2px solid #ff073a;
+  box-shadow:
+    0 0 5px #ff073a,
+    0 0 10px #ff073a,
+    0 0 20px #ff073a,
+    0 0 40px #ff073a;
+}
+
+footer {
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: none;
+    z-index: 10;
+}
