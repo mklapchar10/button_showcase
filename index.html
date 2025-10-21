@@ -26,6 +26,21 @@
             <button id="image">Image</button>
             <button id="shapes">Shapes</button>
             <button id="neon">Neon</button>
+            <button id="font">Font</button>
+            <button id="static">Static</button>
+            <button id="random">Random</button>
+            <button id="flip">Flip</button>
+            <label class="switch">
+              <input type="checkbox" id="switcher">
+              <span class="slider"></span>
+            </label>
+            <button id="lock" disabled>Lock</button>
+            <button id="pulse">Pulse</button>
+            <button id="shake">Shake</button>
+            <button id="shine">Shine</button>
+            <button id="party" class="party-btn">Party</button>
+            <button id="used">Used</button>
+            <button id="functional">Functional</button>
         </div>    
         </div>
     </body>
@@ -96,6 +111,100 @@ document.addEventListener('mousemove', (e) => {
     }
   }
 });
+
+const toggle = document.getElementById('switcher');
+const button = document.getElementById('lock');
+
+toggle.addEventListener('change', () => {
+  if (toggle.checked) {
+    button.disabled = false;
+    button.classList.add('enabled');
+  } else {
+    button.disabled = true;
+    button.classList.remove('enabled');
+  }
+});
+
+const colors = ["#F56E4C", "#F2EE38", "#8CEB78", "#51F5C9", "#51B1F5", "#B7B4FA", "#FAB4FA", "#C96196"]
+
+const randomBtn = document.getElementById("random");
+
+const originalColor = randomBtn.style.backgroundColor;
+
+randomBtn.addEventListener("mouseenter", () => {
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  randomBtn.style.backgroundColor = randomColor;
+});  
+
+  randomBtn.addEventListener("mouseleave", () => {
+  randomBtn.style.backgroundColor = originalColor;
+});
+
+const COLORS = ["#ff6b6b","#ffd93d","#6be3ff","#9b8cff","#6bff9b","#ff9bd6","#ffd2a6"];
+const explodeBtn = document.getElementById("party");
+
+let explodeInterval = null;
+
+explodeBtn.addEventListener("mouseenter", () => {
+  
+  explodeInterval = setInterval(() => {
+    createBurst(explodeBtn);
+  }, 500);
+});
+
+explodeBtn.addEventListener("mouseleave", () => {
+  
+  clearInterval(explodeInterval);
+});
+
+function createBurst(source) {
+  const rect = source.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+  const PARTICLE_COUNT = 15;
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    const size = randInt(6, 12);
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+    p.style.background = pick(COLORS);
+
+    const angle = Math.random() * Math.PI * 2;
+    const distance = rand(60, 120);
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+    const dur = randInt(600, 1000);
+
+    p.style.left = `${x - size / 2}px`;
+    p.style.top = `${y - size / 2}px`;
+    p.style.setProperty("--tx", `${tx}px`);
+    p.style.setProperty("--ty", `${ty}px`);
+    p.style.setProperty("--dur", `${dur}ms`);
+
+    document.body.appendChild(p);
+    p.addEventListener("animationend", () => p.remove());
+  }
+}
+
+function rand(min, max) { return Math.random() * (max - min) + min; }
+function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+const usedButton = document.getElementById("used");
+
+usedButton.addEventListener("click", () => {
+  usedButton.classList.toggle("clicked");
+});
+
+const goButton = document.getElementById("functional");
+
+goButton.addEventListener("click", () => {
+  window.open("https://docs.google.com/document/d/1DNxNf8PdR1d6m7RvcmIZ13MPZW413ye7B68uENKj3NA/edit?usp=sharing", "_blank");
+
+});
+
 </script>
 
 </html>
